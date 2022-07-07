@@ -49,11 +49,24 @@ body {
   height: 100%;
 }
 
-.list,
 .clear {
   box-shadow: 10px 8px 22px 6px rgba(196, 196, 196, 0.75);
   -webkit-box-shadow: 10px 8px 22px 6px rgba(196, 196, 196, 0.75);
   -moz-box-shadow: 10px 8px 22px 6px rgba(196, 196, 196, 0.75);
+}
+
+.color-primary {
+  color: #008000;
+  font-size: 20px;
+}
+
+.line-through {
+  text-decoration: line-through;
+  color: #7f7f7f;
+}
+
+.dark-light{
+  color: #7f7f7f;
 }
 
 .clear {
@@ -112,5 +125,5 @@ input:focus {
 
 .list li.bg-yellow,
 .list li.bg-yellow input {
-  background-color: #f9d8b0;
+  background-color: #fffed3;
 }
