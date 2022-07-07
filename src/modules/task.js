@@ -7,7 +7,7 @@ export default class Task {
   constructor(description, completed = false) {
     this.description = description;
     this.completed = completed;
-    this.index = Task.LIST.length;
+    this.index = Task.LIST.length+1;
   }
 
   appendToList() {
@@ -20,7 +20,7 @@ export default class Task {
   }
 
   static updateIndexes() {
-    let initIndex = 0;
+    let initIndex = 1;
     Task.LIST.forEach((elmt) => {
       elmt.index = initIndex;
       initIndex += 1;
