@@ -1,38 +1,28 @@
 import listItem from './list-item.js';
+import TaskStorage from './task-storage';
 
 export default class Task {
-  static LIST = [];
+  static LIST = TaskStorage.exist() ? TaskStorage.get() : [];
 
-  static trackIndex = 0;
 
   constructor(description, completed = false) {
     this.description = description;
     this.completed = completed;
-    this.index = Task.trackIndex++;
-  }
-
-  get completed() {
-    return this._completed;
-  }
-
-  set completed(value) {
-    this._completed = value;
-  }
-
-  get description() {
-    return this._description;
-  }
-
-  set description(value) {
-    this._description = value;
+    this.index = Task.LIST.length;
   }
 
   appendToList() {
     Task.LIST.push(this);
   }
 
-  remove() {
-    Task.LIST = [...Task.LIST.filter(x => x.index !== this.index)];
+  static remove(index) {
+    Task.LIST = [...Task.LIST.filter(x => x.index !== index)];
+    Task.updateIndexes();
+  }
+
+  static updateIndexes() {
+    let initIndex = 0;
+    Task.LIST.forEach(elmt => elmt.index = initIndex++);
   }
 
 
@@ -42,5 +32,9 @@ export default class Task {
 
   static list() {
     return Task.LIST.map((item) => listItem(item)).join('');
+  }
+
+  static updateStorage() {
+    new TaskStorage(Task.LIST);
   }
 }
