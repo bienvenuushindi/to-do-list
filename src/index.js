@@ -1,13 +1,10 @@
-import Task from './modules/Task.js';
-import { list } from './modules/elements.js';
+import Task from './modules/task.js';
+import list from './modules/elements.js';
 import './style.css';
 import listItem from './modules/list-item.js';
 
 const init = () => {
-  const task1 = new Task('wash the dishes');
-  const task2 = new Task('complete to Do list project');
-  task1.appendToList();
-  task2.appendToList();
+  Task.updateStorage();
   list.innerHTML += Task.list();
 };
 
@@ -15,11 +12,57 @@ window.addEventListener('load', () => {
   init();
 });
 document.addEventListener('keypress', (ev) => {
-  if (ev.key === 'Enter' && ev.target.classList.contains('add-task')) {
-    const text = document.getElementById('add-task').value;
-    if (!text) return;
-    const task = new Task(text);
-    task.appendToList();
-    list.innerHTML += listItem(task);
+  const elmt = ev.target;
+  if (ev.key === 'Enter') {
+    if (elmt.classList.contains('add-task')) {
+      const text = document.getElementById('add-task').value;
+      if (!text) return;
+      const task = new Task(text);
+      task.appendToList();
+      Task.updateStorage();
+      list.innerHTML += listItem(task);
+    } else if (elmt.classList.contains('update')) {
+      const text = elmt.value;
+      const parentNode = elmt.closest('.item');
+      const itemId = parseInt(parentNode.getAttribute('id'), 10);
+      const task = Task.getTask(itemId);
+      task.description = text;
+      Task.updateStorage();
+    }
+  }
+});
+
+list.addEventListener('click', (ev) => {
+  const element = ev.target;
+  if (element.classList.contains('item') || element.classList.contains('add-task')) return;
+  const parentNode = element.closest('.item');
+  const itemId = parseInt(parentNode.getAttribute('id'), 10);
+  const task = Task.getTask(itemId);
+  if (element.classList.contains('checkbox') || element.classList.contains('check')) {
+    const completed = element.classList.contains('check');
+    task.completed = !completed;
+    Task.updateStorage();
+    parentNode.firstChild.classList.toggle('d-none');
+    parentNode.firstChild.nextSibling.classList.toggle('d-none');
+    if (element.classList.contains('check')) parentNode.querySelector('.item-label').classList.remove('line-through');
+    else parentNode.querySelector('.item-label').classList.add('line-through');
+  }
+
+  if (element.classList.contains('item-label')) {
+    const input = element.nextElementSibling;
+    parentNode.classList.toggle('bg-yellow');
+    element.classList.toggle('d-none');
+    input.classList.toggle('d-none');
+    parentNode.lastChild.classList.toggle('d-none');
+    parentNode.lastChild.previousSibling.classList.toggle('d-none');
+    input.value = task.description;
+  }
+
+  if (element.classList.contains('icon') || element.classList.contains('trash')) {
+    if (element.classList.contains('trash')) {
+      Task.remove(task.index);
+      Task.updateStorage();
+      parentNode.remove();
+    }
   }
 });
