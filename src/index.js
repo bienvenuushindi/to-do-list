@@ -1,12 +1,25 @@
-import _ from 'lodash';
+import Task from './modules/Task.js';
+import { list } from './modules/elements.js';
 import './style.css';
+import listItem from './modules/list-item.js';
 
-function component() {
-  const element = document.createElement('div');
+const init = () => {
+  const task1 = new Task('wash the dishes');
+  const task2 = new Task('complete to Do list project');
+  task1.appendToList();
+  task2.appendToList();
+  list.innerHTML += Task.list();
+};
 
-  element.innerHTML = _.join(['Congratulation you are', 'Ready to go'], ' ');
-  element.classList.add('hello');
-  return element;
-}
-
-document.body.appendChild(component());
+window.addEventListener('load', () => {
+  init();
+});
+document.addEventListener('keypress', (ev) => {
+  if (ev.key === 'Enter' && ev.target.classList.contains('add-task')) {
+    const text = document.getElementById('add-task').value;
+    if (!text) return;
+    const task = new Task(text);
+    task.appendToList();
+    list.innerHTML += listItem(task);
+  }
+});

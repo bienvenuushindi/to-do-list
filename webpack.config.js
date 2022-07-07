@@ -1,6 +1,8 @@
-const path=require('path');
+const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-module.exports={
+
+module.exports = {
+  mode: 'development',
   entry: './src/index.js',
   devServer: {
     static: './dist',
@@ -19,12 +21,11 @@ module.exports={
     rules: [
       {
         test: /\.css$/i,
-        use: ['style-loader','css-loader'],
-      }
+        use: ['style-loader', 'css-loader'],
+      },
     ],
   },
   optimization: {
     runtimeChunk: 'single',
   },
-  mode: 'development',
 };
