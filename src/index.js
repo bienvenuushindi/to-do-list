@@ -1,20 +1,17 @@
-import Task from './modules/task';
-import { list } from './modules/elements';
+import Task from './modules/task.js';
+import list from './modules/elements.js';
 import './style.css';
-import listItem from './modules/list-item';
-import TaskStorage from './modules/task-storage';
+import listItem from './modules/list-item.js';
 
 const init = () => {
   Task.updateStorage();
-  console.log(Task.LIST)
   list.innerHTML += Task.list();
 };
 
-const addItemField = document.querySelector('.text-area');
 window.addEventListener('load', () => {
   init();
 });
-document.addEventListener('keypress', function (ev) {
+document.addEventListener('keypress', (ev) => {
   const elmt = ev.target;
   if (ev.key === 'Enter') {
     if (elmt.classList.contains('add-task')) {
@@ -27,7 +24,7 @@ document.addEventListener('keypress', function (ev) {
     } else if (elmt.classList.contains('update')) {
       const text = elmt.value;
       const parentNode = elmt.closest('.item');
-      const itemId = parseInt(parentNode.getAttribute('id'));
+      const itemId = parseInt(parentNode.getAttribute('id'), 10);
       const task = Task.getTask(itemId);
       task.description = text;
       Task.updateStorage();
@@ -39,19 +36,16 @@ list.addEventListener('click', (ev) => {
   const element = ev.target;
   if (element.classList.contains('item') || element.classList.contains('add-task')) return;
   const parentNode = element.closest('.item');
-  const itemId = parseInt(parentNode.getAttribute('id'));
+  const itemId = parseInt(parentNode.getAttribute('id'), 10);
   const task = Task.getTask(itemId);
- console.log(task);
   if (element.classList.contains('checkbox') || element.classList.contains('check')) {
-    const completed=element.classList.contains('check');
+    const completed = element.classList.contains('check');
     task.completed = !completed;
     Task.updateStorage();
     parentNode.firstChild.classList.toggle('d-none');
     parentNode.firstChild.nextSibling.classList.toggle('d-none');
-      if(element.classList.contains('check')) parentNode.querySelector('.item-label').classList.remove('line-through');
-      else parentNode.querySelector('.item-label').classList.add('line-through');
-
-
+    if (element.classList.contains('check')) parentNode.querySelector('.item-label').classList.remove('line-through');
+    else parentNode.querySelector('.item-label').classList.add('line-through');
   }
 
   if (element.classList.contains('item-label')) {
@@ -69,8 +63,6 @@ list.addEventListener('click', (ev) => {
       Task.remove(task.index);
       Task.updateStorage();
       parentNode.remove();
-    } else {
-
     }
   }
 });

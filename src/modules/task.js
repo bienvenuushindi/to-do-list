@@ -1,9 +1,8 @@
 import listItem from './list-item.js';
-import TaskStorage from './task-storage';
+import TaskStorage from './task-storage.js';
 
 export default class Task {
   static LIST = TaskStorage.exist() ? TaskStorage.get() : [];
-
 
   constructor(description, completed = false) {
     this.description = description;
@@ -16,18 +15,20 @@ export default class Task {
   }
 
   static remove(index) {
-    Task.LIST = [...Task.LIST.filter(x => x.index !== index)];
+    Task.LIST = [...Task.LIST.filter((x) => x.index !== index)];
     Task.updateIndexes();
   }
 
   static updateIndexes() {
     let initIndex = 0;
-    Task.LIST.forEach(elmt => elmt.index = initIndex++);
+    Task.LIST.forEach((elmt) => {
+      elmt.index = initIndex;
+      initIndex += 1;
+    });
   }
 
-
   static getTask(id) {
-    return Task.LIST.find(x => x.index === id);
+    return Task.LIST.find((x) => x.index === id);
   }
 
   static list() {
@@ -35,6 +36,6 @@ export default class Task {
   }
 
   static updateStorage() {
-    new TaskStorage(Task.LIST);
+    TaskStorage.create(Task.LIST);
   }
 }

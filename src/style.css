@@ -49,12 +49,6 @@ body {
   height: 100%;
 }
 
-.clear {
-  box-shadow: 10px 8px 22px 6px rgba(196, 196, 196, 0.75);
-  -webkit-box-shadow: 10px 8px 22px 6px rgba(196, 196, 196, 0.75);
-  -moz-box-shadow: 10px 8px 22px 6px rgba(196, 196, 196, 0.75);
-}
-
 .color-primary {
   color: #008000;
   font-size: 20px;
@@ -65,7 +59,7 @@ body {
   color: #7f7f7f;
 }
 
-.dark-light{
+.dark-light {
   color: #7f7f7f;
 }
 
@@ -73,6 +67,7 @@ body {
   text-align: center;
   grid-column: 2;
   padding: 1rem 0.7rem;
+  border: 1px solid rgba(180, 180, 180, 0.73);
 }
 
 .link {
