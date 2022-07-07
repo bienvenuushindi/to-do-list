@@ -1,5 +1,5 @@
 {
-  "name": "webpack-boilerplate",
+  "name": "to-do-list",
   "version": "1.0.0",
   "description": "simple webpack boilerplate",
   "private": true,
@@ -11,15 +11,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bienvenuushindi/webpack-boilerplate.git"
+    "url": "git+https://github.com/bienvenuushindi/to-do-list.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/bienvenuushindi/webpack-boilerplate/issues"
+    "url": "https://github.com/bienvenuushindi/to-do-list/issues"
   },
-  "homepage": "https://github.com/bienvenuushindi/webpack-boilerplate#readme",
+  "homepage": "https://github.com/bienvenuushindi/to-do-list#readme",
   "devDependencies": {
     "babel-eslint": "^10.1.0",
     "css-loader": "^6.7.1",
