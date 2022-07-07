@@ -7,7 +7,7 @@ export default class Task {
   constructor(description, completed = false) {
     this.description = description;
     this.completed = completed;
-    this.index = Task.LIST.length+1;
+    this.index = Task.LIST.length + 1;
   }
 
   appendToList() {
