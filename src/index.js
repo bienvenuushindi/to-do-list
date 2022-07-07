@@ -24,7 +24,6 @@ document.addEventListener('keypress', (ev) => {
     } else if (elmt.classList.contains('update')) {
       const text = elmt.value;
       const parentNode = elmt.closest('.item');
-      console.log('clicked');
       const label = parentNode.querySelector('.item-label');
       const itemId = parseInt(parentNode.getAttribute('id'), 10);
       const task = Task.getTask(itemId);
@@ -42,7 +41,7 @@ list.addEventListener('click', (ev) => {
   const element = ev.target;
   if (element.classList.contains('item') || element.classList.contains('add-task')) return;
   const parentNode = element.closest('.item');
-  if(!parentNode) return;
+  if (!parentNode) return;
   const itemId = parseInt(parentNode.getAttribute('id'), 10);
   const task = Task.getTask(itemId);
   if (element.classList.contains('checkbox') || element.classList.contains('check')) {
