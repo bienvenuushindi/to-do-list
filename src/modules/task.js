@@ -38,4 +38,9 @@ export default class Task {
   static updateStorage() {
     TaskStorage.create(Task.LIST);
   }
+
+  static clearCompleted() {
+    Task.LIST = [...Task.LIST.filter((x) => !x.completed)];
+    Task.updateIndexes();
+  }
 }

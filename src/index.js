@@ -1,5 +1,5 @@
 import Task from './modules/task.js';
-import list from './modules/elements.js';
+import list, { clear } from './modules/elements.js';
 import './style.css';
 import listItem from './modules/list-item.js';
 
@@ -24,10 +24,16 @@ document.addEventListener('keypress', (ev) => {
     } else if (elmt.classList.contains('update')) {
       const text = elmt.value;
       const parentNode = elmt.closest('.item');
+      console.log('clicked');
+      const label = parentNode.querySelector('.item-label');
       const itemId = parseInt(parentNode.getAttribute('id'), 10);
       const task = Task.getTask(itemId);
       task.description = text;
       Task.updateStorage();
+      parentNode.classList.remove('bg-yellow');
+      label.classList.remove('d-none');
+      label.nextElementSibling.classList.add('d-none');
+      label.innerHTML = text;
     }
   }
 });
@@ -36,6 +42,7 @@ list.addEventListener('click', (ev) => {
   const element = ev.target;
   if (element.classList.contains('item') || element.classList.contains('add-task')) return;
   const parentNode = element.closest('.item');
+  if(!parentNode) return;
   const itemId = parseInt(parentNode.getAttribute('id'), 10);
   const task = Task.getTask(itemId);
   if (element.classList.contains('checkbox') || element.classList.contains('check')) {
@@ -65,4 +72,13 @@ list.addEventListener('click', (ev) => {
       parentNode.remove();
     }
   }
+});
+
+clear.addEventListener('click', () => {
+  Task.clearCompleted();
+  Task.updateStorage();
+  // remove completed tasks
+  document.querySelectorAll('.line-through').forEach((elmt) => {
+    elmt.closest('.item').remove();
+  });
 });
