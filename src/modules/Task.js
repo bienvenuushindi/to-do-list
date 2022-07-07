@@ -13,10 +13,6 @@ export default class Task {
     Task.LIST.push(this);
   }
 
-  removeToList() {
-    Task.LIST.pop();
-  }
-
   static list() {
     return Task.LIST.map((item) => listItem(item)).join('');
   }
