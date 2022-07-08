@@ -56,6 +56,14 @@ list.addEventListener('click', (ev) => {
 
   if (element.classList.contains('item-label')) {
     const input = element.nextElementSibling;
+    const active = document.querySelector('.bg-yellow');
+
+    if (active) {
+      active.classList.remove('bg-yellow');
+      active.querySelector('.item-label').classList.toggle('d-none');
+      active.querySelector('.update').classList.toggle('d-none');
+    }
+
     parentNode.classList.toggle('bg-yellow');
     element.classList.toggle('d-none');
     input.classList.toggle('d-none');
