@@ -29,6 +29,10 @@ To get a local copy up and running follow these simple example steps.
 - Run `npm install` to install all the dependencies
 - Run `npm start` to fire a development server
 
+## Live Demo
+
+[Click here](https://bienvenuushindi.github.io/to-do-list/)
+
 ## Authors
 
 👤 **UsbBush**
