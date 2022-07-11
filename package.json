@@ -4,10 +4,9 @@
   "description": "simple webpack boilerplate",
   "private": true,
   "scripts": {
-    "dev": "webpack --mode development",
-    "watch": "webpack --watch",
-    "start": "webpack serve --open",
-    "build": "webpack"
+    "serve": "npm run watch && npm run start",
+    "start": "webpack-dev-server --progress --colors",
+    "watch": "webpack -w"
   },
   "repository": {
     "type": "git",
