@@ -1,13 +1,5 @@
-export default class TaskStorage {
-  static get() {
-    return JSON.parse(localStorage.getItem('tasks'));
-  }
+export const getItem = () => JSON.parse(localStorage.getItem('tasks'));
 
-  static exist() {
-    return !!localStorage.getItem('tasks');
-  }
+export const exist = () => !!localStorage.getItem('tasks');
 
-  static create(item) {
-    localStorage.setItem('tasks', JSON.stringify(item));
-  }
-}
+export const create = (item) => localStorage.setItem('tasks', JSON.stringify(item));
