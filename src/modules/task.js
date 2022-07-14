@@ -1,8 +1,8 @@
 import listItem from './list-item.js';
-import TaskStorage from './task-storage.js';
+import * as TaskStorage from './task-storage.js';
 
 export default class Task {
-  static LIST = TaskStorage.exist() ? TaskStorage.get() : [];
+  LIST = TaskStorage.exist() ? TaskStorage.getItem() : [];
 
   constructor(description, completed = false) {
     this.description = description;
@@ -13,34 +13,30 @@ export default class Task {
   appendToList() {
     Task.LIST.push(this);
   }
-
-  static remove(index) {
-    Task.LIST = [...Task.LIST.filter((x) => x.index !== index)];
-    Task.updateIndexes();
-  }
-
-  static updateIndexes() {
-    let initIndex = 1;
-    Task.LIST.forEach((elmt) => {
-      elmt.index = initIndex;
-      initIndex += 1;
-    });
-  }
-
-  static getTask(id) {
-    return Task.LIST.find((x) => x.index === id);
-  }
-
-  static list() {
-    return Task.LIST.map((item) => listItem(item)).join('');
-  }
-
-  static updateStorage() {
-    TaskStorage.create(Task.LIST);
-  }
-
-  static clearCompleted() {
-    Task.LIST = [...Task.LIST.filter((x) => !x.completed)];
-    Task.updateIndexes();
-  }
 }
+
+export const updateIndexes = () => {
+  let initIndex = 1;
+  Task.LIST.forEach((elmt) => {
+    elmt.index = initIndex;
+    initIndex += 1;
+  });
+};
+
+export const updateStorage = () => {
+  TaskStorage.create(Task.LIST);
+};
+
+export const remove = (index) => {
+  Task.LIST = [...Task.LIST.filter((x) => x.index !== index)];
+  updateIndexes();
+};
+
+export const getTask = (id) => Task.LIST.find((x) => x.index === id);
+
+export const list = () => Task.LIST.map((item) => listItem(item)).join('');
+
+export const clearCompleted = () => {
+  Task.LIST = [...Task.LIST.filter((x) => !x.completed)];
+  updateIndexes();
+};

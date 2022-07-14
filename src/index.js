@@ -1,11 +1,17 @@
-import Task from './modules/task.js';
-import list, { clear } from './modules/elements.js';
+import Task, {
+  updateStorage,
+  getTask,
+  clearCompleted,
+  list as listTask,
+  remove as removeTask,
+} from './modules/task.js';
+import listBox, { clearBtn } from './modules/elements.js';
 import './style.css';
 import listItem from './modules/list-item.js';
 
 const init = () => {
-  Task.updateStorage();
-  list.innerHTML += Task.list();
+  updateStorage();
+  listBox.innerHTML += listTask();
 };
 
 window.addEventListener('load', () => {
@@ -19,16 +25,16 @@ document.addEventListener('keypress', (ev) => {
       if (!text) return;
       const task = new Task(text);
       task.appendToList();
-      Task.updateStorage();
-      list.innerHTML += listItem(task);
+      updateStorage();
+      listBox.innerHTML += listItem(task);
     } else if (elmt.classList.contains('update')) {
       const text = elmt.value;
       const parentNode = elmt.closest('.item');
       const label = parentNode.querySelector('.item-label');
       const itemId = parseInt(parentNode.getAttribute('id'), 10);
-      const task = Task.getTask(itemId);
+      const task = getTask(itemId);
       task.description = text;
-      Task.updateStorage();
+      updateStorage();
       parentNode.classList.remove('bg-yellow');
       label.classList.remove('d-none');
       label.nextElementSibling.classList.add('d-none');
@@ -37,17 +43,17 @@ document.addEventListener('keypress', (ev) => {
   }
 });
 
-list.addEventListener('click', (ev) => {
+listBox.addEventListener('click', (ev) => {
   const element = ev.target;
   if (element.classList.contains('item') || element.classList.contains('add-task')) return;
   const parentNode = element.closest('.item');
   if (!parentNode) return;
   const itemId = parseInt(parentNode.getAttribute('id'), 10);
-  const task = Task.getTask(itemId);
+  const task = getTask(itemId);
   if (element.classList.contains('checkbox') || element.classList.contains('check')) {
     const completed = element.classList.contains('check');
     task.completed = !completed;
-    Task.updateStorage();
+    updateStorage();
     parentNode.firstChild.classList.toggle('d-none');
     parentNode.firstChild.nextSibling.classList.toggle('d-none');
     if (element.classList.contains('check')) parentNode.querySelector('.item-label').classList.remove('line-through');
@@ -74,16 +80,16 @@ list.addEventListener('click', (ev) => {
 
   if (element.classList.contains('icon') || element.classList.contains('trash')) {
     if (element.classList.contains('trash')) {
-      Task.remove(task.index);
-      Task.updateStorage();
+      removeTask(task.index);
+      updateStorage();
       parentNode.remove();
     }
   }
 });
 
-clear.addEventListener('click', () => {
-  Task.clearCompleted();
-  Task.updateStorage();
+clearBtn.addEventListener('click', () => {
+  clearCompleted();
+  updateStorage();
   // remove completed tasks
   document.querySelectorAll('.line-through').forEach((elmt) => {
     elmt.closest('.item').remove();

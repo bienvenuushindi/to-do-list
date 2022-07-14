@@ -1,3 +1,3 @@
-const list = document.querySelector('.list');
-export const clear = document.querySelector('.clear');
-export default list;
+const listBox = document.querySelector('.list');
+export const clearBtn = document.querySelector('.clear');
+export default listBox;
