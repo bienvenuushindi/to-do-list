@@ -35,6 +35,8 @@ document.addEventListener('keypress', (ev) => {
       const task = getTask(itemId);
       task.description = text;
       updateStorage();
+      parentNode.lastChild.classList.toggle('d-none');
+      parentNode.lastChild.previousSibling.classList.toggle('d-none');
       parentNode.classList.remove('bg-yellow');
       label.classList.remove('d-none');
       label.nextElementSibling.classList.add('d-none');
@@ -65,6 +67,8 @@ listBox.addEventListener('click', (ev) => {
     const active = document.querySelector('.bg-yellow');
 
     if (active) {
+      active.lastChild.classList.toggle('d-none');
+      active.lastChild.previousSibling.classList.toggle('d-none');
       active.classList.remove('bg-yellow');
       active.querySelector('.item-label').classList.toggle('d-none');
       active.querySelector('.update').classList.toggle('d-none');
