@@ -15,10 +15,8 @@ export default class Task {
 }
 
 export const updateIndexes = () => {
-  let initIndex = 1;
-  TaskList.forEach((elmt) => {
-    elmt.index = initIndex;
-    initIndex += 1;
+  TaskList.forEach((elmt, index) => {
+    elmt.index = index + 1;
   });
 };
 
