@@ -14,12 +14,6 @@ body {
   background-color: #eee;
 }
 
-.container {
-  display: grid;
-  grid-template-columns: 1fr 30% 1fr;
-  margin-top: 5%;
-}
-
 .list {
   grid-column: 2;
   border: 1px solid #b9b9b9;
@@ -121,4 +115,17 @@ input:focus {
 .list li.bg-yellow,
 .list li.bg-yellow input {
   background-color: #fffed3;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+@media screen and (min-width: 765px) {
+  .container {
+    display: grid;
+    grid-template-columns: 1fr 30% 1fr;
+    margin-top: 5%;
+  }
 }
