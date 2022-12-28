@@ -31,7 +31,7 @@ To get a local copy up and running follow these simple example steps.
 
 ## Live Demo
 
-[Click here](https://bienvenuushindi.github.io/to-do-list/dist/index.html)
+[Click here](https://bienvenuushindi.github.io/to-do-list)
 
 ## Authors
 
