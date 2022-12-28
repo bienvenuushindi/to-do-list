@@ -7,7 +7,9 @@
     "test": "jest",
     "serve": "npm run watch && npm run start",
     "start": "webpack-dev-server --progress ",
-    "watch": "webpack -w"
+    "watch": "webpack -w",
+    "build": "webpack",
+    "deploy": "gh-pages -d dist"
   },
   "repository": {
     "type": "git",
