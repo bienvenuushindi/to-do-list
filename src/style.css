@@ -120,7 +120,7 @@ input:focus {
 .container {
   display: flex;
   flex-direction: column;
-  margin-top: 5%;
+  margin-top: 6%;
 }
 
 @media screen and (min-width: 765px) {
